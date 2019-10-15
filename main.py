@@ -7,6 +7,7 @@ def main():
   config['graphite_port'] = os.getenv('GRAPHITE_PORT')
   config['metric_path'] = os.getenv('METRIC_PATH')
   config['report_interval'] = os.getenv('REPORT_INTERVAL')
+  config['prometheus_port'] = os.getenv('PROMETHEUS_PORT')
 
   try:
     monitor = Monitor(config)
