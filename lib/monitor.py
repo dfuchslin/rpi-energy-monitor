@@ -7,12 +7,12 @@ class Monitor:
 
     def __init__(self, config):
         self.config = config
-        self.sensor_gpio = self.get_config_or_default('sensor_gpio', 4)
+        self.sensor_gpio = int(self.get_config_or_default('sensor_gpio', 4))
         self.graphite_host = self.get_config_or_default('graphite_host', 'localhost')
-        self.graphite_port = self.get_config_or_default('graphite_port', 2003)
+        self.graphite_port = int(self.get_config_or_default('graphite_port', 2003))
         self.metric_prefix = self.get_config_or_default('metric_prefix', 'test.energy.monitor.prefix')
-        self.report_interval = self.get_config_or_default('report_interval', 10)
-        self.prometheus_port = self.get_config_or_default('prometheus_port', 9101)
+        self.report_interval = int(self.get_config_or_default('report_interval', 10))
+        self.prometheus_port = int(self.get_config_or_default('prometheus_port', 9101))
 
     def get_config_or_default(self, config_param, default):
         if self.config[config_param]:
