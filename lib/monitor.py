@@ -20,7 +20,8 @@ class Monitor:
         else:
             return default
 
-    def increment(self):
+    def increment(self, channel):
+        print(" --> gpio triggered")
         self.counter.inc()
 
     def start(self):
