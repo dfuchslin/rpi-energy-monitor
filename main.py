@@ -1,4 +1,5 @@
 import os
+import time
 from lib.monitor import Monitor
 
 
@@ -14,6 +15,10 @@ def main():
     try:
         monitor = Monitor(config)
         monitor.start()
+
+        while True:
+            time.sleep(60)
+
     except KeyboardInterrupt:
         print("cancelling...")
     finally:
