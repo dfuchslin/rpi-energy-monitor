@@ -21,7 +21,6 @@ class Monitor:
             return default
 
     def increment(self, channel):
-        print(" --> gpio triggered")
         self.counter.inc()
 
     def start(self):
