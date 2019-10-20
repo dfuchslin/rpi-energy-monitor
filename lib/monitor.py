@@ -10,8 +10,8 @@ class Monitor:
         self.sensor_gpio = int(self.get_config_or_default('sensor_gpio', 4))
         self.graphite_host = self.get_config_or_default('graphite_host', 'localhost')
         self.graphite_port = int(self.get_config_or_default('graphite_port', 2003))
-        self.metric_prefix = self.get_config_or_default('metric_prefix', 'test.energy.monitor.prefix')
-        self.report_interval = int(self.get_config_or_default('report_interval', 10))
+        self.graphite_metric_prefix = self.get_config_or_default('graphite_metric_prefix', 'test.prefix')
+        self.graphite_report_interval = int(self.get_config_or_default('graphite_report_interval', 10))
         self.prometheus_port = int(self.get_config_or_default('prometheus_port', 9101))
 
     def get_config_or_default(self, config_param, default):
@@ -28,8 +28,8 @@ class Monitor:
         print("  GPIO: {:d}".format(self.sensor_gpio))
         print("  graphite:")
         print("    server         : {}:{}".format(self.graphite_host, self.graphite_port))
-        print("    metric prefix  : {}".format(self.metric_prefix))
-        print("    report interval: {:d}".format(self.report_interval))
+        print("    metric prefix  : {}".format(self.graphite_metric_prefix))
+        print("    report interval: {:d}".format(self.graphite_report_interval))
         print("  prometheus:")
         print("    port: {}".format(self.prometheus_port))
         print("    path: /metrics")
@@ -37,7 +37,7 @@ class Monitor:
         registry = CollectorRegistry()
         self.counter = Counter('meter_power', 'Total watt-hours consumed', registry=registry)
         gb = GraphiteBridge((self.graphite_host, self.graphite_port), registry=registry)
-        gb.start(self.report_interval, prefix=self.metric_prefix)
+        gb.start(self.graphite_report_interval, prefix=self.graphite_metric_prefix)
         start_http_server(self.prometheus_port, registry=registry)
 
         GPIO.setmode(GPIO.BCM)
