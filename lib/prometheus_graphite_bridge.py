@@ -79,7 +79,7 @@ class PrometheusToGraphiteMetricConverterBridge:
 
     def send_metric(self, current_metric):
         try:
-            timestamp = int(datetime.timestamp(datetime.utcnow()))
+            timestamp = int(datetime.timestamp(current_metric['timestamp']))
             msg = "{} {:0.0f} {:d}\n".format(self.graphite_metric, current_metric['value'], timestamp)
             print("importing to {}:{}  [{}]".format(self.graphite_host, self.graphite_port, msg.replace('\n', '')), flush=True)
             sock = socket.socket()
