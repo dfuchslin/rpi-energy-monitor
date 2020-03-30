@@ -11,6 +11,8 @@ def main():
     config['graphite_metric_prefix'] = os.getenv('GRAPHITE_METRIC_PREFIX')
     config['graphite_report_interval'] = os.getenv('GRAPHITE_REPORT_INTERVAL')
     config['prometheus_port'] = os.getenv('PROMETHEUS_PORT')
+    config['influxdb_host'] = os.getenv('INFLUXDB_HOST')
+    config['influxdb_port'] = os.getenv('INFLUXDB_PORT')
 
     try:
         monitor = Monitor(config)
